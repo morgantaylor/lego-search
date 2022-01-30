@@ -1,0 +1,29 @@
+/* presuming body font-size: 16px */
+:root {
+  /**
+  * @tokens Space Scale
+  * @presenter Spacing
+  */
+  /* -16px */
+  --space-neg-1: -1rem;
+  /* -8px */
+  --space-neg-half: -.5rem;
+  /* 4px */
+  --space-quarter: .25rem;
+  /* 8px */
+  --space-half: .5rem;
+  /* 16px */
+  --space-1: 1rem;
+  /* 18px */
+  --space-2: 1.125rem;
+  /* 20px */
+  --space-3: 1.25rem;
+  /* 24px */
+  --space-4: 1.5rem;
+  /* 32px */
+  --space-5: 2rem;
+  /* 36px */
+  --space-6: 2.25rem;
+  /* 48px */
+  --space-7: 3rem;
+}

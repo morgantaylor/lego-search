@@ -1,0 +1,22 @@
+.page {
+  padding: var(--space-2);
+
+  &-title {
+    font-weight: 600;
+    font-size: var(--type-scale-6);
+    color: var(--color-white);
+  }
+  
+  &-subtitle,
+  &-total {
+    text-align: center;
+  }
+
+  &-results {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: var(--space-2);
+    min-height: 250px;
+  }
+}

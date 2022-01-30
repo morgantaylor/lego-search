@@ -1,0 +1,26 @@
+// ===================
+// SPACE UTILITIES
+// ===================
+
+$directions: top right bottom left;
+
+@each $direction in $directions {
+  @for $i from 1 through 10 {
+    .pad-#{$direction}--#{$i}x {
+      padding-#{$direction}: var(--space-#{$i});
+    }
+
+    .marg-#{$direction}--#{$i}x {
+      margin-#{$direction}: var(--space-#{$i});
+    }
+  }
+}
+
+
+$flex-directions: left right;
+
+@each $direction in $flex-directions {
+  .push-#{$direction} {
+    margin-#{$direction}: auto !important;
+  }
+}

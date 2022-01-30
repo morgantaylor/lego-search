@@ -1,0 +1,125 @@
+// ==================
+// Cards 
+// ==================
+
+.card {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 3px 7px 2px rgba(0, 0, 0, 0.2);
+  background-color: var(--color-white);
+  border-radius: 4px;
+  padding: 0 var(--space-1);
+  margin-bottom: 20px;
+  margin-right: 20px;
+  overflow: hidden;
+  line-height: 1.3;
+  width: 300px;
+
+  &__body {
+    flex: 1;
+    margin: var(--space-1) 0;
+  }
+
+  &__text,
+  &__title {
+    display: block;
+  }
+
+  &__text {
+    color: #333;
+
+    &:not(:last-child) {
+      margin-bottom: 4px;
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  &__link {
+
+    & + & {
+      margin-left: 16px;
+    }
+  }
+
+  &__button {
+    margin: 0;
+  }
+}
+
+// Card Display & Images 
+.card__display {
+  position: relative;
+  background-size: contain;
+  background-position: center;
+  width: calc(100% + 32px);
+  left: -16px;
+  height: 169px;
+  background-repeat: no-repeat;
+
+  &--top {
+    border-top-left-radius: calc(4px - 1px);
+    border-top-right-radius: calc(4px - 1px);
+    top: -1px;
+  }
+
+  &--bottom {
+    border-radius: 0;
+    border-bottom-left-radius: calc(4px - 1px);
+    border-bottom-right-radius: calc(4px - 1px);
+    bottom: -1px;
+  }
+
+  &--overlay {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    justify-content: center;
+  }
+}
+
+// Header & Footer 
+.card {
+  &__header,
+  &__footer {
+    flex: 1;
+    background-color: #fafafa;
+    border-bottom: 1px solid #fafafa;
+    padding: 16px;
+    margin: 0 -16px;
+  }
+}
+
+// Card Sizing
+.card {
+  &.card--sm {
+    width: 150px;
+
+    .card__display--top,
+    .card__display--bottom {
+      height: 84px;
+    }
+  }
+  &.card--lg {
+    width: 450px;
+    max-width: 450px;
+
+    .card__display--top,
+    .card__display--bottom {
+      height: 273px;
+    }
+  }
+
+  // Card Alignment
+  &.card--centered {
+    text-align: center;
+  }
+
+  &.card--right {
+    text-align: right;
+  }
+}

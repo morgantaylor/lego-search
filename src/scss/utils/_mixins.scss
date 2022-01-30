@@ -1,0 +1,57 @@
+// ==================
+// Mixins
+// ==================
+
+// Text Mixin //
+
+@mixin text($size: null, $height: null, $weight: null, $color: null) {
+  font-size: $size;
+  line-height: $height;
+  font-weight: $weight;
+  color: $color;
+}
+
+// Responsive Font Sizes //
+@mixin font-size($fs-map) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @if $fs-breakpoint == null { // default
+      font-size: $fs-font-size;
+    }
+    @else if $fs-breakpoint == 'phone' {
+      font-size: $fs-font-size;
+    }
+    @else if $fs-breakpoint == 'tablet' {
+      @media screen and (min-width: 600px) and (max-width: 1024px) {
+        font-size: $fs-font-size;
+      }
+    }
+    @else if $fs-breakpoint == 'desktop' {
+      @media screen and (min-width: 1025px) {
+        font-size: $fs-font-size;
+      }
+    }
+  }
+}
+
+// Transform 
+// Ex: @include transform(translateY, 10px);
+@mixin transform($transforms) {
+  transform: $transforms;
+}
+
+// Box Shadow 
+// Ex: box-shadow(2px, 2px, 6px, rgba(0, 0, 0, 0.28));
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    box-shadow: inset $top $left $blur $color;
+  } @else {
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+// This is the old mixin for transitions,
+// going to need to trasition theses
+@mixin transition($var...) {
+  transition: $var;
+}
+

@@ -1,0 +1,18 @@
+@import './breakpoints';
+
+%disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+%ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+%mobile-full-width {
+  @media #{$phone} {
+    width: 100%;
+  }
+}

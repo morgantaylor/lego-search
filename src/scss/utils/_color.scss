@@ -1,0 +1,36 @@
+// ==================
+// Colors 
+// ==================
+
+:root {
+    /**
+    * @tokens Colors
+    * @presenter Color
+    */
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-transparent: transparent;
+    /* Neutral */
+    --color-neutral-100: #f9f9f9;
+    --color-neutral-200: #f0f0f0;
+    --color-neutral-300: #d2d2d2;
+    --color-neutral-400: #b5b5b5;
+    --color-neutral-500: #999999;
+    --color-neutral-600: #7e7e7e;
+    --color-neutral-700: #646464;
+    --color-neutral-800: #4b4b4b;
+    --color-neutral-900: #333333;
+    /* Actions */
+    --color-blue-d-20:  #005e8e;
+    --color-blue:       #0075b2;
+    --color-blue-l-20:  #3391c1;
+    --color-green-d-20: #336633;
+    --color-green:      #408040;
+    --color-green-l-20: #669966;
+    --color-orange-d-20:#ba5d02;
+    --color-orange:     #E97403;
+    --color-orange-l-20:#ed9035;
+    --color-red-d-20:   #aa323f;
+    --color-red:        #d53e4f;
+    --color-red-l-20:   #dd6572;
+}
