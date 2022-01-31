@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getPartsCaregories, getPartPicture } from '../actions/actions.js'
+import { getPartsCaregories, getPartPicture, PAGE_SIZE } from '../actions/actions.js'
 import Card from '../components/card'
 import Input from '../components/input.js'
+import NoResults from '../components/noResults.js'
+import Pagination from '../components/pagination.js'
 
 const PartsPage = () => {
   const navigate = useNavigate()
@@ -10,6 +12,8 @@ const PartsPage = () => {
   const [page, setPage] = useState(1)
   const [parts, setParts] = useState([])
   const [total, setTotal] = useState(0)
+  const [isPrev, setIsPrev] = useState(true)
+  const [isNext, setIsNext] = useState(true)
   const [loading, setLoading] = useState(true)
   const [firstLoad, setFirstLoad] = useState(true)
 
@@ -27,7 +31,7 @@ const PartsPage = () => {
   const handleGetPart = async (id, name) => navigate(`/parts/${id}`, { state: { partName: name } })
 
   const fetchParts = async (page = 1, search = '') => {
-    const { results, count } = await getPartsCaregories(page, search)
+    const { results, count, next, previous } = await getPartsCaregories(page, search)
     const unresolved = results.map(async (part) => {
       const results = await getPartPicture(page, part.id)
       return results
@@ -36,6 +40,8 @@ const PartsPage = () => {
     const updated = results.map((part, ix) => ({ ...part, part_img_url: resolved.find(i => i.part_cat_id === part.id).part_img_url }))
     setParts(updated)
     setTotal(count)
+    setIsNext(next)
+    setIsPrev(previous)
     setLoading(false)
   }
 
@@ -66,15 +72,24 @@ const PartsPage = () => {
         />
       </section>
       <section className='page-results'>
-        {!loading &&
-          <>{parts.map((item, ix) => <Card key={ix} item={item} handleGetPart={handleGetPart} />)}</>}
         {loading && <p className='spinner'>Loading...</p>}
+        {!loading &&
+          <>
+            {!parts.length && <NoResults />}
+            {parts.length > 0 &&
+              <>{parts.map((item, ix) => <Card key={ix} item={item} handleGetPart={handleGetPart} />)}</>}
+          </>}
       </section>
-      <section className='pagination'>
-        <button type='button' className='btn btn--blue pagination__item' onClick={prevPage} disabled={loading}>Prev</button>
-        <p className='page-total'>Total Response: {total}</p>
-        <button type='button' className='btn btn--blue pagination__item' onClick={nextPage} disabled={loading}>Next</button>
-      </section>
+      <Pagination
+        prevPage={prevPage}
+        nextPage={nextPage}
+        loading={loading}
+        isPrev={isPrev}
+        isNext={isNext}
+        page={page}
+        pageSize={PAGE_SIZE}
+        total={total}
+      />
     </>
   )
 }

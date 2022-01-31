@@ -1,10 +1,16 @@
 import React from 'react'
 import ImagePlaceholder from '../assets/placeholder.png'
 
-const Card = ({ item, ...props }) => {
+const Card = ({
+  item,
+  ...props
+}) => {
   const noImg = !item.set_img_url && !item.rgb && !item.part_img_url
   return (
-    <div className='card' onClick={() => props.handleGetPart(item.id, item.name)}>
+    <div
+      className='card'
+      {...(props.handleGetPart && { onClick: () => props.handleGetPart(item.id, item.name) })}
+    >
       {item.set_img_url && <div className='card__display card__display--top' alt={item.name} style={{ backgroundImage: `url(${item.set_img_url})` }} />}
       {item.rgb && <div className='card__display card__display--top' alt={item.name} style={{ backgroundColor: `#${item.rgb}` }} />}
       {item.part_img_url && <div className='card__display card__display--top' alt={item.name} style={{ backgroundImage: `url(${item.part_img_url})` }} />}
@@ -18,4 +24,5 @@ const Card = ({ item, ...props }) => {
     </div>
   )
 }
+
 export default Card

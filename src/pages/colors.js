@@ -1,31 +1,26 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { getColors } from '../actions/actions.js'
+import React, { useState, useEffect } from 'react'
+import { getColors, PAGE_SIZE } from '../actions/actions.js'
 import Card from '../components/card'
-import Input from '../components/input.js'
+import Pagination from '../components/pagination.js'
 
 const ColorsPage = () => {
-  const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
   const [colors, setColors] = useState([])
   const [total, setTotal] = useState(0)
+  const [isPrev, setIsPrev] = useState(true)
+  const [isNext, setIsNext] = useState(true)
   const [loading, setLoading] = useState(true)
   const [firstLoad, setFirstLoad] = useState(true)
-
-  const usePrevious = value => {
-    const ref = useRef()
-    useEffect(() => {
-      ref.current = value
-    }, [value])
-    return ref.current
-  }
 
   const nextPage = () => setPage(p => p + 1)
   const prevPage = () => setPage(p => p - 1)
 
   const fetchColors = async (page = 1) => {
-    const { results, count } = await getColors(page)
+    const { results, count, next, previous } = await getColors(page)
     setTotal(count)
     setColors(results)
+    setIsNext(next)
+    setIsPrev(previous)
     setLoading(false)
   }
 
@@ -38,33 +33,23 @@ const ColorsPage = () => {
     if (!firstLoad && page >= 1) fetchColors(page)
   }, [page, firstLoad])
 
-  const prevSearch = usePrevious(search)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (prevSearch !== search) fetchColors(page, search)
-    }, 1000)
-    return () => clearTimeout(timer)
-  }, [search, page, prevSearch])
-
   return (
     <>
-      <section className='search'>
-        <Input
-          placeholder='Search colors...'
-          onChange={e => setSearch(e.target.value)}
-          value={search}
-        />
-      </section>
       <section className='page-results'>
+        {loading && <p className='spinner'>Loading...</p>}
         {!loading &&
           <>{colors.map((item, ix) => <Card key={ix} item={item} />)}</>}
-        {loading && <p className='spinner'>Loading...</p>}
       </section>
-      <section className='pagination'>
-        <button type='button' className='btn btn--blue pagination__item' onClick={prevPage}>Prev</button>
-        <p className='page-total'>Total Colors: {total}</p>
-        <button type='button' className='btn btn--blue pagination__item' onClick={nextPage}>Next</button>
-      </section>
+      <Pagination
+        prevPage={prevPage}
+        nextPage={nextPage}
+        loading={loading}
+        isPrev={isPrev}
+        isNext={isNext}
+        page={page}
+        pageSize={PAGE_SIZE}
+        total={total}
+      />
     </>
   )
 }

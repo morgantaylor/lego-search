@@ -6,7 +6,7 @@ const LEGO_MINIFIGS = `${LEGO_API}minifigs/`
 const LEGO_COLORS = `${LEGO_API}colors/`
 const LEGO_PARTS_CAT = `${LEGO_API}part_categories/`
 const LEGO_PARTS = `${LEGO_API}parts/`
-
+export const PAGE_SIZE = 12
 const KEY = TOKEN.API_TOKEN
 
 const config = {
@@ -15,7 +15,7 @@ const config = {
 }
 
 export const getMiniFigures = (page, search) => {
-  const query = `${LEGO_MINIFIGS}?key=${KEY}&page=${page}&page_size=12&search=${search}`
+  const query = `${LEGO_MINIFIGS}?key=${KEY}&page=${page}&page_size=${PAGE_SIZE}&search=${search}`
   return fetch(query, config)
     .then(response => response.json())
     .then(data => {
@@ -24,7 +24,7 @@ export const getMiniFigures = (page, search) => {
 }
 
 export const getSets = (page, search) => {
-  const query = `${LEGO_SETS}?key=${KEY}&page=${page}&page_size=12&ordering=-year&search=${search}`
+  const query = `${LEGO_SETS}?key=${KEY}&page=${page}&page_size=${PAGE_SIZE}&ordering=-year&search=${search}`
   return fetch(query, config)
     .then(response => response.json())
     .then(data => {
@@ -33,7 +33,7 @@ export const getSets = (page, search) => {
 }
 
 export const getColors = (page, search) => {
-  const query = `${LEGO_COLORS}?key=${KEY}&page=${page}&page_size=12&search=${search}`
+  const query = `${LEGO_COLORS}?key=${KEY}&page=${page}&page_size=${PAGE_SIZE}&search=${search}`
   return fetch(query, config)
     .then(response => response.json())
     .then(data => {
@@ -42,7 +42,7 @@ export const getColors = (page, search) => {
 }
 
 export const getPartsCaregories = (page, search) => {
-  const query = `${LEGO_PARTS_CAT}?key=${KEY}&page=${page}&page_size=12&search=${search}`
+  const query = `${LEGO_PARTS_CAT}?key=${KEY}&page=${page}&page_size=${PAGE_SIZE}&search=${search}`
   return fetch(query, config)
     .then(response => response.json())
     .then(data => {
@@ -51,17 +51,16 @@ export const getPartsCaregories = (page, search) => {
 }
 
 export const getPart = (page, id, search) => {
-  const query = `${LEGO_PARTS}?key=${KEY}&page=${page}&page_size=12&part_cat_id=${id}&search=${search}`
+  const query = `${LEGO_PARTS}?key=${KEY}&page=${page}&page_size=${PAGE_SIZE}&part_cat_id=${id}&search=${search}`
   return fetch(query, config)
     .then(response => response.json())
     .then(data => {
-      console.log('getPart data: ', data)
       return data
     })
 }
 
 export const getPartPicture = (page, catID) => {
-  const query = `${LEGO_PARTS}?key=${KEY}&page=${page}&page_size=12&part_cat_id=${catID}`
+  const query = `${LEGO_PARTS}?key=${KEY}&page=${page}&page_size=${PAGE_SIZE}&part_cat_id=${catID}`
   return fetch(query, config)
     .then(response => response.json())
     .then(data => {
